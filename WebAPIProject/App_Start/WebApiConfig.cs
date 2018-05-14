@@ -8,7 +8,7 @@ namespace WebAPIProject
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
-        {
+        {   
             // Web API configuration and services
 
             // Web API routes
@@ -16,7 +16,7 @@ namespace WebAPIProject
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "LiquidApp/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }
