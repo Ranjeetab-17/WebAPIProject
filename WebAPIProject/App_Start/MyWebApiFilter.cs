@@ -11,16 +11,22 @@ using System.Web.Http.Filters;
 
 namespace WebAPIProject.App_Start
 {
-    public class MyWebApiFilter:IAuthorizationFilter
+    public class MyWebApiFilter : AuthorizationFilterAttribute
     {
-        public bool AllowMultiple { get; }
-
-        public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken,
-            Func<Task<HttpResponseMessage>> continuation)
+        public override void OnAuthorization(HttpActionContext actionContext)
         {
-            StreamWriter file=new StreamWriter(@"D:/myApiLog.txt");
-            file.WriteLine($"ActionName : {actionContext.ActionDescriptor.ActionName}");
-            throw new NotImplementedException();
+            //StreamWriter file = new StreamWriter(@"E:/APIError.txt");
+            //file.WriteLine($"Actionname : {actionContext.ActionDescriptor.ActionName}");
+            base.OnAuthorization(actionContext);
         }
+        //public bool AllowMultiple { get; }
+
+        //public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken,
+        //    Func<Task<HttpResponseMessage>> continuation)
+        //{
+        //    StreamWriter file=new StreamWriter(@"D:/myApiLog.txt");
+        //    file.WriteLine($"ActionName : {actionContext.ActionDescriptor.ActionName}");
+        //    throw new NotImplementedException();
+        //}
     }
 }
