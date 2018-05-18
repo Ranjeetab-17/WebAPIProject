@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -11,22 +12,26 @@ using System.Web.Http.Filters;
 
 namespace WebAPIProject.App_Start
 {
-    public class MyWebApiFilter : AuthorizationFilterAttribute
+    public class MyWebApiFilter : ActionFilterAttribute
     {
-        public override void OnAuthorization(HttpActionContext actionContext)
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            //StreamWriter file = new StreamWriter(@"E:/APIError.txt");
-            //file.WriteLine($"Actionname : {actionContext.ActionDescriptor.ActionName}");
-            base.OnAuthorization(actionContext);
+            var actionName = actionContext.ActionDescriptor.ActionName;
+            var userId = actionContext.ActionArguments.Values;
+            var Password = actionContext.ActionArguments.Values;
+            //var objectContent = actionContext.
         }
-        //public bool AllowMultiple { get; }
 
-        //public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken,
-        //    Func<Task<HttpResponseMessage>> continuation)
-        //{
-        //    StreamWriter file=new StreamWriter(@"D:/myApiLog.txt");
-        //    file.WriteLine($"ActionName : {actionContext.ActionDescriptor.ActionName}");
-        //    throw new NotImplementedException();
-        //}
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+            var objectContent = actionExecutedContext.Response.Content as ObjectContent;
+            if (objectContent != null)
+            {
+                var type = objectContent.ObjectType; //type of the returned object
+                var value = objectContent.Value; //holding the returned value
+            }
+
+            Debug.WriteLine("ACTION 1 DEBUG  OnActionExecuted Response " + actionExecutedContext.Response.StatusCode.ToString());
+        }
     }
 }
