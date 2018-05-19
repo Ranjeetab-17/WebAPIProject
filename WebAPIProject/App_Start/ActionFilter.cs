@@ -15,7 +15,7 @@ using WebAPIProject.Models;
 
 namespace WebAPIProject.App_Start
 {
-    public class MyWebApiFilter : ActionFilterAttribute
+    public class ActionFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
@@ -24,7 +24,7 @@ namespace WebAPIProject.App_Start
             var actionName = actionContext.ActionDescriptor.ActionName;
             var controllerName = actionContext.ActionDescriptor.ControllerDescriptor.ControllerName;
             var userInput = (DefaultInput)actionContext.ActionArguments.Values.AsQueryable().SingleOrDefault();
-            if (userInput.UserID == "Test" && userInput.Password == "Powai")
+            if (userInput.UserID == "IFAAPPTEST" && userInput.Password == "Powai")
                 actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Accepted, "CheckSum Success");
             actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, "CheckSum Failed");
         }       

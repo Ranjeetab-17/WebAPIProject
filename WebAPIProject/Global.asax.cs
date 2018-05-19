@@ -12,7 +12,8 @@ namespace WebAPIProject
     {
         public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
         {
-            filters.Add(new MyWebApiFilter());
+            filters.Add(new ActionFilter());
+            filters.Add(new AuthorizeFilter());
         }
 
         protected void Application_Start()
