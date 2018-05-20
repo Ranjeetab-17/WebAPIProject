@@ -14,10 +14,10 @@ namespace WebAPIProject.App_Start
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            var userInput = (DefaultInput)actionContext.ActionArguments.Values.AsQueryable().SingleOrDefault();
-            if (userInput.UserID == "16341" && userInput.Password == "Powai")
-                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Accepted, "Authentication Failure");
-            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.ProxyAuthenticationRequired, "Authentication Failure");
+            //var userInput = (DefaultInput)actionContext.ActionArguments.Values.AsQueryable().SingleOrDefault();
+            //if (userInput.UserID == "16341" && userInput.Password == "Powai")
+            //    actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Accepted, "Authentication Failure");
+            //actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.ProxyAuthenticationRequired, "Authentication Failure");
         }
     }
 }

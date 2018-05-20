@@ -23,8 +23,9 @@ namespace WebAPIProject.App_Start
             var datetTimeStamp = actionContext.Request.Headers.SingleOrDefault(x => x.Key == "DateTimeStamp").Value.SingleOrDefault();             
             var actionName = actionContext.ActionDescriptor.ActionName;
             var controllerName = actionContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-            var userInput = (DefaultInput)actionContext.ActionArguments.Values.AsQueryable().SingleOrDefault();
-            if (userInput.UserID == "IFAAPPTEST" && userInput.Password == "Powai")
+           // var userInput = (DefaultInput)actionContext.ActionArguments.Values.AsQueryable().SingleOrDefault();
+            dynamic getUserInput = actionContext.ActionArguments.Values.AsQueryable().SingleOrDefault();
+            if (getUserInput.UserID == "IFAAPPTEST" && getUserInput.Password == "Powai")
                 actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.Accepted, "CheckSum Success");
             actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, "CheckSum Failed");
         }       
